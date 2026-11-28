@@ -14,6 +14,6 @@ if not exist "litellm\config.yaml" (
 
 if "%LITELLM_MASTER_KEY%"=="" set "LITELLM_MASTER_KEY=sk-local-secret"
 
-"D:\Python313\Scripts\litellm.exe" --config "litellm\config.yaml" --host 127.0.0.1 --port 4000
+"C:\JavaSpringAI\advlabs\10.2-adv-intelligent-customer-support-ai-gateway-litellm\windows\.venv\Scripts\litellm.exe" --config "litellm\config.yaml" --host 127.0.0.1 --port 4000
 
 pause
