@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML is parsed by XmlWorkflowLoader and converted to LangGraph4j StateGraph nodes/edges. -->
+<workflow id="customer-support" start="retrieveKnowledge">
+    <nodes>
+        <node id="retrieveKnowledge" bean="ragNode" />
+        <node id="inspectOrder" bean="mcpNode" />
+        <node id="makeDecision" bean="decisionNode" />
+        <node id="humanApproval" bean="approvalNode" />
+        <node id="composeResponse" bean="responseNode" />
+    </nodes>
+    <edges>
+        <edge from="START" to="retrieveKnowledge" />
+        <edge from="retrieveKnowledge" to="inspectOrder" />
+        <edge from="inspectOrder" to="makeDecision" />
+        <edge from="makeDecision" to="humanApproval" />
+        <edge from="humanApproval" to="composeResponse" />
+        <edge from="composeResponse" to="END" />
+    </edges>
+</workflow>

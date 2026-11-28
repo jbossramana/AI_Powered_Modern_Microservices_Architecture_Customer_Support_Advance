@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-ai-advisors-guardrails-demo
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3.2:latest
+        options:
+          temperature: 0.1
+
+logging:
+  level:
+    com.example.support: INFO
+    org.springframework.ai: INFO

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Java-Version: 21
+Build-Jdk-Spec: 25
+Implementation-Title: 06.3-langgraph4j-rag-mcp-client
+Implementation-Version: 1.0.1
+Created-By: Maven Integration for Eclipse
+

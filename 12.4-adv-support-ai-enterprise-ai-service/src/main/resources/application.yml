@@ -1,0 +1,31 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: ai-orchestrator-service
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.2
+      embedding:
+        options:
+          model: nomic-embed-text
+    mcp:
+      client:
+        name: support-ai-client
+        version: 1.0.0
+        type: SYNC
+        request-timeout: 30s
+        streamable-http:
+          connections:
+            support-tools:
+              url: ${MCP_SERVER_URL:http://localhost:8085}
+              endpoint: /mcp
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -1,0 +1,27 @@
+package rules
+
+import com.acme.support.order.OrderPolicyFact;
+
+rule "Reject Invalid Order"
+when
+    $order : OrderPolicyFact(amount <= 0.0)
+then
+    $order.setDecision("REJECT");
+    $order.setReason("Order amount must be positive");
+end
+
+rule "Manual Review High Value Order"
+when
+    $order : OrderPolicyFact(amount > 10000.0)
+then
+    $order.setDecision("MANUAL_REVIEW");
+    $order.setReason("High value order requires manual review");
+end
+
+rule "Approve Normal Order"
+when
+    $order : OrderPolicyFact(amount > 0.0 && amount <= 10000.0)
+then
+    $order.setDecision("APPROVE");
+    $order.setReason("Order passed business policy");
+end

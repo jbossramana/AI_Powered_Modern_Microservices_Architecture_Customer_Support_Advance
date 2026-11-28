@@ -1,0 +1,78 @@
+<workflow name="customer-support-workflow">
+
+    <!-- Starting node -->
+    <start node="customerAgent"/>
+
+    <!-- Workflow nodes -->
+    <nodes>
+
+        <node id="customerAgent"
+              name="Customer Agent"
+              description="Analyzes customer messages and identifies intent"/>
+
+        <node id="billingAgent"
+              name="Billing Agent"
+              description="Checks payment transactions and duplicate payments"/>
+
+        <node id="policyAgent"
+              name="Policy Agent"
+              description="Evaluates refund eligibility based on billing results"/>
+
+        <node id="finalResponse"
+              name="Final Response"
+              description="Generates the final customer support response"/>
+
+    </nodes>
+
+    <!-- Workflow transitions -->
+    <transitions>
+
+        <!-- Customer Agent routing -->
+
+        <transition
+                from="customerAgent"
+                to="billingAgent"
+                condition="DUPLICATE_PAYMENT"/>
+
+        <transition
+                from="customerAgent"
+                to="billingAgent"
+                condition="PAYMENT_ISSUE"/>
+
+        <transition
+                from="customerAgent"
+                to="policyAgent"
+                condition="POLICY_QUESTION"/>
+
+        <transition
+                from="customerAgent"
+                to="finalResponse"
+                condition="GENERAL_QUERY"/>
+
+
+        <!-- Billing Agent routing -->
+
+        <transition
+                from="billingAgent"
+                to="policyAgent"
+                condition="REFUND_REQUIRED"/>
+
+        <transition
+                from="billingAgent"
+                to="finalResponse"
+                condition="NO_REFUND_REQUIRED"/>
+
+
+        <!-- Policy Agent routing -->
+
+        <transition
+                from="policyAgent"
+                to="finalResponse"
+                condition="POLICY_EVALUATED"/>
+
+    </transitions>
+
+    <!-- Ending node -->
+    <end node="finalResponse"/>
+
+</workflow>

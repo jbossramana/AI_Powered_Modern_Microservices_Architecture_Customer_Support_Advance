@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: support-orchestrator
+
+agents:
+  customer-url: ${CUSTOMER_AGENT_URL:http://localhost:8081}
+  billing-url: ${BILLING_AGENT_URL:http://localhost:8082}
+  policy-url: ${POLICY_AGENT_URL:http://localhost:8083}
+
+logging:
+  level:
+    com.example: INFO

@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-stacktrace: never
+spring:
+  application:
+    name: customer-support-ai-secure
+  datasource:
+    url: jdbc:h2:mem:supportdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: false
+  ai:
+    model:
+      chat: ollama
+      embedding: ollama
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3.2:latest
+        options:
+          temperature: 0.2
+          num-predict: 256
+          num-ctx: 4096
+      embedding:
+        model: nomic-embed-text:latest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+logging:
+  level:
+    root: INFO
+    com.example.support: INFO
+app:
+  security:
+    max-message-chars: 2000
+    max-context-chars: 3500
+    max-output-chars: 1800
+    requests-per-minute: 20

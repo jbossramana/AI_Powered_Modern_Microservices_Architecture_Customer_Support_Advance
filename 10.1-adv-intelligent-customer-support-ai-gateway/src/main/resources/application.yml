@@ -1,0 +1,55 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: intelligent-customer-support-ai-enterprise
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3.2:latest}
+          temperature: 0.2
+      init:
+        pull-model-strategy: when_missing
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+support:
+  ai:
+    model: ${OLLAMA_CHAT_MODEL:llama3.2:latest}
+  gateway:
+    max-prompt-chars: 8000
+    api-keys:
+      demo-internal-portal:
+        client-name: Internal Support Portal
+        requests-per-minute: 20
+        daily-token-quota: 100000
+      demo-partner-integration:
+        client-name: Partner Integration
+        requests-per-minute: 5
+        daily-token-quota: 20000
+  usage:
+    max-events: 2000
+    input-cost-per-million: 0.10
+    output-cost-per-million: 0.20
+  cache:
+    ttl-seconds: 600
+    max-entries: 1000
+  memory:
+    max-messages: 20
+  security:
+    pii-masking: true
+    prompt-injection-check: true
+logging:
+  level:
+    com.acmesupport.ai: INFO
+    org.springframework.ai: INFO

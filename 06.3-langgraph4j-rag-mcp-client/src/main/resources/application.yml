@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3.2
+        temperature: 0.1
+      embedding:
+        model: nomic-embed-text
+    mcp:
+      client:
+        type: SYNC
+        request-timeout: 20s
+        streamable-http:
+          connections:
+            support-tools:
+              url: http://localhost:8091
+              endpoint: /mcp

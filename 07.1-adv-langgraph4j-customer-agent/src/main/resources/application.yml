@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: customer-agent
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: "${CUSTOMER_MODEL:llama3.2:latest}"
+          temperature: 0.2
+
+logging:
+  level:
+    com.example: INFO

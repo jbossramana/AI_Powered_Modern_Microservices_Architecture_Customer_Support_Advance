@@ -1,0 +1,40 @@
+
+server:
+  port: 8085
+
+spring:
+  application:
+    name: spring-ai-litellm-gateway
+
+  ai:
+    openai:
+      base-url: http://localhost:4000
+      api-key: sk-local-secret
+      chat:
+        options:
+          model: ${LITELLM_MODEL:llama3.2}
+          temperature: 0.2
+          max-tokens: 700
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+gateway:
+  security:
+    api-key: ${GATEWAY_API_KEY:my-local-gateway-client-secret}
+
+  guardrails:
+    max-input-chars: 8000
+    max-output-chars: 12000
+    block-prompt-injection: true
+    mask-pii: true
+    reject-on-pii-in-input: false
+    reject-on-pii-in-output: false
+    reject-on-internal-prompt-leak: true
+    blocked-terms:
+      - "steal credentials"
+      - "reveal system prompt"
+      - "build malware"
