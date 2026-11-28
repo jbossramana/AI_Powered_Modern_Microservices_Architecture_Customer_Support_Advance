@@ -18,3 +18,5 @@ router_settings:
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
+  store_model_in_db: false
+  disable_spend_logs: true
